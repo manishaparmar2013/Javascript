@@ -1,0 +1,40 @@
+<!-- Place at the top the the FormFill section, for testing only. -->
+<!-- For production, choose to place in the skin or in FormFill section. -->
+<script type="text/javascript" src="JSINI.js"></script>
+<script type="text/javascript">
+
+        // Gets the current user ID
+        var user_id = CallSINIMethod("GetValue", ["SystemProperty", "LoggedOnUserID", null]);
+        // Get the current transaction ID.
+        var docID = CallSINIMethod("GetValue", ["SystemProperty", "CurrentUserDocument", user_id]);
+        
+        // Get document details
+        var docName = CallSINIMethod("GetValue", ["DocumentProperty", "ProductName", docID]);
+        var docDis = CallSINIMethod("GetValue", ["DocumentProperty", "Description", docID]);
+        // 'Price' is not being calculated until after the user leaves the 'FormFill' step.
+        // Can we force the price to calculate, to be displayed on the 'FormFill' step
+        var docPrice = CallSINIMethod("GetValue", ["DocumentProperty", "Price", docID]); 
+        var docPageCount = CallSINIMethod("GetValue", ["DocumentProperty", "PageCount", docID]);
+
+        // Get product details
+        var currentProductID = CallSINIMethod("GetValue", ["ProductProperty", "MasterProductID", user_id]);   
+        var currentProductType = CallSINIMethod("GetValue", ["ProductProperty", "ProductType", currentProductID]);   
+        
+        // Get system details
+        var currentTheme = CallSINIMethod("GetValue", ["SystemProperty", "CurrentTheme", null]);
+        var currentPrefixForLinks = CallSINIMethod("GetValue", ["SystemProperty", "UrlPrefixForLinks", null]);
+
+        // Log it all to the console
+        console.log('Current user ID = ' + user_id);
+        console.log('Current document ID = ' + docID);
+        console.log('Current document name = ' + docName);
+        console.log('Current document Discription = ' + docDis);
+        console.log('Current document price = ' + docPrice);
+        console.log('Current document page count = ' + docPageCount);
+        console.log('Current theme = ' + currentTheme);
+        console.log('Current prefix for links = ' + currentPrefixForLinks);
+        console.log('Current product ID = ' + currentProductID);
+        console.log('Current product type = ' + currentProductType);
+
+        // Note to future self - checkout the 'Javascript/ShoppingCart Mods/Shopping Cart info on other pages/SiteFooter.html' on GitHub
+</script>
